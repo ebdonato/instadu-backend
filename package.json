@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
-    "deploy": "heroku builds:create -a instadu-backend"
+    "deploy": "heroku builds:create -a instadu-backend",
+    "web-push": "web-push"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +16,7 @@
     "express": "^4.17.1",
     "firebase-admin": "^9.3.0",
     "nodemon": "^2.0.6",
-    "uuid-v4": "^0.1.0"
+    "uuid-v4": "^0.1.0",
+    "web-push": "^3.4.4"
   }
 }
