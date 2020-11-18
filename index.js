@@ -77,6 +77,8 @@ app.post('/createPost', (request, response) => {
     let fields = {}
     let fileData = {}
 
+    let imageUrl = ''
+
     busboy.on('file', function (fieldName, file, filename, encoding, mimetype) {
         //console.log('File [' + fieldName + ']: filename: ' + filename + ', encoding: ' + encoding + ', mimetype: ' + mimetype)
 
@@ -114,13 +116,15 @@ app.post('/createPost', (request, response) => {
         })
 
         function createDocument(uploadedFile) {
+            imageUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${uploadedFile.name}?alt=media&token=${uuid}`
+
             // Add a new document in collection
             db.collection('posts').doc(fields.id).set({
                 id: fields.id,
                 caption: fields.caption,
                 location: fields.location,
                 date: parseInt(fields.date),
-                imageUrl: `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${uploadedFile.name}?alt=media&token=${uuid}`
+                imageUrl
             }).then(() => {
                 sendPushNotification()
                 response.send('Post Added: ' + fields.id)
@@ -148,6 +152,7 @@ app.post('/createPost', (request, response) => {
                         const pushContent = {
                             title: 'Nova postagem no Instadu!',
                             body: 'Nova postagem adicionada! Wow!',
+                            imageUrl,
                             openUrl: '/#/'
                         }
 
