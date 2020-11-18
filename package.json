@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "env-cmd nodemon index.js",
     "start": "nodemon index.js",
     "deploy": "heroku builds:create -a instadu-backend",
     "web-push": "web-push"
@@ -18,5 +19,8 @@
     "nodemon": "^2.0.6",
     "uuid-v4": "^0.1.0",
     "web-push": "^3.4.4"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0"
   }
 }

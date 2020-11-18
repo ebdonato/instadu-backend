@@ -14,7 +14,7 @@ const UUID = require('uuid-v4')
 const webpush = require('web-push')
 
 //configuração - firebase
-
+//caminho para a chave privada do Admin SDK do Firebase
 let serviceAccount = require('./serviceAccountKey.json');
 
 admin.initializeApp({
@@ -34,8 +34,8 @@ const port = 3000
 // configuração do web-push - enviar notificações
 webpush.setVapidDetails(
     'mailto:example@yourdomain.org',
-    'BOt09vMIvG_JXilxKflPMM_FxJr1FgGhSAbZlLMxVGiH3alTfWo2jK5R6d4M6_TYZ8F9Oe40HYtslU2f4N4bd70',//vapidKeys.publicKey,
-    'fH350rrnNl0QgvFkdXafK2vqqtJ5MpvgFuPyofdy0rw' //vapidKeys.privateKey
+    process.env.VAPID_PUBLIC_KEY,//vapidKeys.publicKey,
+    process.env.VAPID_PRIVATE_KEY //vapidKeys.privateKey
 )
 
 // endpoint (rota?)
